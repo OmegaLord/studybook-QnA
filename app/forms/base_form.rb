@@ -2,10 +2,11 @@ class BaseForm
   include ActiveModel::Model
   include ActiveModel::Serialization
   include ActiveModel::Conversion
+  include Comparable
 
   attr_accessor :body, :attachments_attributes
 
-  delegate :id, :attachments, :comments, :user, :model_name, :persisted?, to: :object
+  delegate :id, :attachments, :comments, :user, :model_name, :persisted?, :<=>, to: :object
 
   DELETE_ATTACHMENT = '1'.freeze
 
