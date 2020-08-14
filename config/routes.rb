@@ -34,6 +34,7 @@ Rails.application.routes.draw do
 
       resources :users, only: [:index, :create] do
         get :me, on: :collection
+        resource :profile, only: [:show, :update]
       end
 
       resources :questions, only: [:index, :show, :create, :update, :destroy], shallow: true do
