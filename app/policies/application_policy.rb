@@ -50,6 +50,7 @@ class ApplicationPolicy
   private
 
   def owner?
+
     user == record.user
   end
 end

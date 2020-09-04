@@ -9,8 +9,10 @@ class ProfilesUpdater
     private
 
     def profile_update(profile, params)
-      profile.avatar.purge if params[:avatar]
-      params[:avatar] = blob_base64(params[:avatar]) unless params[:avatar].is_a? ActionDispatch::Http::UploadedFile
+      if params[:avatar]
+        profile.avatar.purge
+        params[:avatar] = blob_base64(params[:avatar]) unless params[:avatar].is_a? ActionDispatch::Http::UploadedFile
+      end
       profile.update params if params.present?
     end
 

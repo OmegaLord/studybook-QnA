@@ -16,7 +16,7 @@ module Api
       private
 
       def set_profile
-        @profile = Profile.find_by(user_id: params[:user_id])
+        @profile = current_resource_owner.profile
       end
 
       def profile_params
