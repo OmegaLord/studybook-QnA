@@ -1,6 +1,6 @@
 module Api
   module V1
-    class ProfilesController < ApplicationController
+    class ProfilesController < ApiController
       before_action :set_profile
 
       def show
@@ -8,9 +8,9 @@ module Api
       end
 
       def update
-        # authorize @profile
-        # flash[:notice] = 'Profile was successfully update.' if ProfilesUpdater.call(@profile, profile_params)
-        # respond_with @profile, location: user_profile_path(current_user)
+        authorize @profile
+        ProfilesUpdater.call(@profile, profile_params)
+        respond_with @profile
       end
 
       private
@@ -20,12 +20,8 @@ module Api
       end
 
       def profile_params
-        params.require(:profile).permit(:first_name, :last_name, :avatar)
+        params.require(:profile).permit(:first_name, :last_name, avatar: [:data, :filename, :type])
       end
     end
-
   end
 end
-
-
-
